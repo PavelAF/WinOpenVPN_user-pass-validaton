@@ -8,5 +8,6 @@ namespace OVPN_user_pass_validation
 {
     class PasswdFileAuth
     {
+
     }
 }
