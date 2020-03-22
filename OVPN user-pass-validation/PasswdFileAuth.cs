@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace OVPN_user_pass_validation
 {
     class PasswdFileAuth
     {
+        static internal bool Begin(XmlNode xmlpasswd)
+        {
+            if (!Program.FileExistReadable(xmlpasswd.)) { return false; }
+            return true;
+        }
     /*
-                    if (!FileExistReadable(passwdFile)) { Environment.ExitCode = 1; return; }
-
-    string[] cred;
-            try { cred = File.ReadAllLines(args[0], Encoding.UTF8); }
-                catch { Environment.ExitCode = 1; return; }
-            if (cred.Length != 2) { Environment.ExitCode = 1; return; }
 
             Regex regex = new Regex(String.Format(matchMask, cred[0], cred[1]));
 

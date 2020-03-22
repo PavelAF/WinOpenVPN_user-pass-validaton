@@ -15,33 +15,51 @@ namespace OVPN_user_pass_validation
 {
     class Program
     {
+        static internal string login, pass;
+        
         static void Main(string[] args)
         {
             if (args.Length != 1 || !FileExistReadable(args[0]) || new FileInfo(args[0]).Length > 160)
                 { Environment.ExitCode = 1; return; }
 
-            string passwdFile = @"ovpn_passwd.txt";
-            string matchMask = @"^{0} : {1}$";
-
             string xmlPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             xmlPath = xmlPath.Substring(0, xmlPath.LastIndexOf('.')) + ".xml";
 
-            if (FileExistReadable(xmlPath))
+            XmlDocument conf = new XmlDocument();
+            try
             {
-                XmlDocument conf = new XmlDocument();
-                conf.Load(xmlPath);
-                XmlNode confNode = conf.SelectSingleNode("/configuration");
-                passwdFile = confNode["passwd_file"].GetAttribute("value");
-                matchMask = confNode["passwd_format"].GetAttribute("value");
+                if (FileExistReadable(xmlPath))
+                {
+                    conf.Load(xmlPath);
+                }
+                else { throw new Exception("xml read err"); }
+            }
+            catch
+            {
+                Environment.ExitCode = 1;
+                return;
             }
 
+            string[] cred;
+            try { cred = File.ReadAllLines(args[0], Encoding.UTF8); }
+            catch { Environment.ExitCode = 1; return; }
+            if (cred.Length != 2) { Environment.ExitCode = 1; return; }
+            login = cred[0];
+            pass = cred[1];
+
+            
+            XmlNode confNode = conf.SelectSingleNode("/configuration");
+            if (confNode.SelectSingleNode("/PasswdFileAuth").Attributes["enabled"].Value == "true")
+                { PasswdFileAuth.Begin(confNode.SelectSingleNode("/PasswdFileAuth")); }
+            if (confNode.SelectSingleNode("/WindowsCredAuth").Attributes["enabled"].Value == "true")
+                { PasswdFileAuth.Begin(confNode.SelectSingleNode("/WindowsCredAuth")); }
 
             Environment.ExitCode = 1;
             return;
         }
 
 
-        static bool FileExistReadable(string filepath)
+        internal static bool FileExistReadable(string filepath)
         {
             if (!System.IO.File.Exists(filepath)) return false;
             try { File.Open(filepath, FileMode.Open, FileAccess.Read).Dispose(); return true; }
