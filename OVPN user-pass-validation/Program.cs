@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices.AccountManagement;
-using System.DirectoryServices.ActiveDirectory;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace OVPN_user_pass_validation
@@ -56,7 +48,7 @@ namespace OVPN_user_pass_validation
                 { Environment.ExitCode = 0; return; }
             if (confNode.SelectSingleNode("WindowsCredAuth").Attributes["enabled"].Value == "true"
                 && WindowsCredAuth.Check(confNode.SelectSingleNode("WindowsCredAuth")))
-                { Environment.ExitCode = 1; return; }
+                { Environment.ExitCode = 0; return; }
             Environment.ExitCode = 1;
             return;
         }
@@ -67,65 +59,6 @@ namespace OVPN_user_pass_validation
             if (!System.IO.File.Exists(filepath)) return false;
             try { File.Open(filepath, FileMode.Open, FileAccess.Read).Dispose(); return true; }
                 catch { return false; }
-        }
-
-        public static bool ValidateUsernameAndPassword(string userName, SecureString securePassword)
-        {
-            bool result = false;
-
-            ContextType contextType = ContextType.Machine;
-
-            if (InDomain())
-            {
-                contextType = ContextType.Domain;
-            }
-
-
-
-            try
-            {
-                using (PrincipalContext principalContext = new PrincipalContext(contextType))
-                {
-                    result = principalContext.ValidateCredentials(
-                        userName,
-                        new NetworkCredential(string.Empty, securePassword).Password
-                    );
-                }
-            }
-            catch (PrincipalOperationException)
-            {
-                // Account disabled? Considering as Login failed
-                result = false;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        ///     Validate: computer connected to domain?   
-        /// </summary>
-        /// <returns>
-        ///     True -- computer is in domain
-        ///     <para>False -- computer not in domain</para>
-        /// </returns>
-        public static bool InDomain()
-        {
-            bool result = true;
-
-            try
-            {
-                Domain domain = Domain.GetComputerDomain();
-            }
-            catch (ActiveDirectoryObjectNotFoundException)
-            {
-                result = false;
-            }
-
-            return result;
         }
 
     }
