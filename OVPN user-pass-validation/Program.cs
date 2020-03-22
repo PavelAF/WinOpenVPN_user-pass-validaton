@@ -15,6 +15,8 @@ namespace OVPN_user_pass_validation
                 { Environment.ExitCode = 1; return; }
 
             string xmlPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string xmlPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            //string xmlPath = Environment.GetCommandLineArgs()[0];
             //string xmlPath = @"D:\Documents\Visual Studio 2017\Projects\OVPN user-pass-validation\OVPN user-pass-validation\bin\x64\Release\OVPN user-pass-validation.exe";
             xmlPath = xmlPath.Substring(0, xmlPath.LastIndexOf('.')) + ".xml";
 
@@ -41,7 +43,7 @@ namespace OVPN_user_pass_validation
             login = cred[0];
             pass = cred[1];
 
-            
+
             XmlNode confNode = conf.SSelectSingleNode("/configuration");
             if (confNode.SSelectSingleNode("PasswdFileAuth").SGetAttrVal("enabled") == "true"
                 && PasswdFileAuth.Check(confNode.SSelectSingleNode("PasswdFileAuth")))
