@@ -22,7 +22,8 @@ namespace OVPN_user_pass_validation
             if (args.Length != 1 || !FileExistReadable(args[0]) || new FileInfo(args[0]).Length > 160)
                 { Environment.ExitCode = 1; return; }
 
-            string xmlPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string xmlPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string xmlPath = @"D:\Documents\Visual Studio 2017\Projects\OVPN user-pass-validation\OVPN user-pass-validation\bin\x64\Release\OVPN user-pass-validation.exe";
             xmlPath = xmlPath.Substring(0, xmlPath.LastIndexOf('.')) + ".xml";
 
             XmlDocument conf = new XmlDocument();
@@ -32,10 +33,11 @@ namespace OVPN_user_pass_validation
                 {
                     conf.Load(xmlPath);
                 }
-                else { throw new Exception("xml read err"); }
+                else { throw new Exception("xml read/exist err"); }
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 Environment.ExitCode = 1;
                 return;
             }
@@ -49,13 +51,12 @@ namespace OVPN_user_pass_validation
 
             
             XmlNode confNode = conf.SelectSingleNode("/configuration");
-            if (confNode.SelectSingleNode("/PasswdFileAuth").Attributes["enabled"].Value == "true"
-                && PasswdFileAuth.Check(confNode.SelectSingleNode("/PasswdFileAuth")))
-                { Environment.ExitCode = 1; return; }
-            //if (confNode.SelectSingleNode("/WindowsCredAuth").Attributes["enabled"].Value == "true"
-            //    && PasswdFileAuth.Check(confNode.SelectSingleNode("/WindowsCredAuth")))
+            if (confNode.SelectSingleNode("PasswdFileAuth").Attributes["enabled"].Value == "true"
+                && PasswdFileAuth.Check(confNode.SelectSingleNode("PasswdFileAuth")))
+                { Environment.ExitCode = 0; return; }
+            //if (confNode.SelectSingleNode("WindowsCredAuth").Attributes["enabled"].Value == "true"
+            //    && PasswdFileAuth.Check(confNode.SelectSingleNode("WindowsCredAuth")))
             //    { Environment.ExitCode = 1; return; }
-
             Environment.ExitCode = 1;
             return;
         }

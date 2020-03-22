@@ -11,7 +11,19 @@ namespace OVPN_user_pass_validation
     {
         static internal bool Check(XmlNode xmlpasswd)
         {
-            //if (!Program.FileExistReadable(xmlpasswd)) { return false; }
+            string passwdPath, passwdFileFormat;
+
+            passwdPath = xmlpasswd["PasswdFilePath"].GetAttribute("value");
+            passwdFileFormat = xmlpasswd["PasswdFileEntryFormatOverride"].GetAttribute("value");
+
+            if (passwdFileFormat == null)
+                passwdFileFormat = Properties.Settings.Default.def_PasswdFileEntryFormat;
+            if (passwdPath == null)
+                return false;
+
+
+
+            //if (!Program.FileExistReadable(xmlpasswd.)) { return false; }
             return true;
         }
     /*
