@@ -54,9 +54,9 @@ namespace OVPN_user_pass_validation
             if (confNode.SelectSingleNode("PasswdFileAuth").Attributes["enabled"].Value == "true"
                 && PasswdFileAuth.Check(confNode.SelectSingleNode("PasswdFileAuth")))
                 { Environment.ExitCode = 0; return; }
-            //if (confNode.SelectSingleNode("WindowsCredAuth").Attributes["enabled"].Value == "true"
-            //    && PasswdFileAuth.Check(confNode.SelectSingleNode("WindowsCredAuth")))
-            //    { Environment.ExitCode = 1; return; }
+            if (confNode.SelectSingleNode("WindowsCredAuth").Attributes["enabled"].Value == "true"
+                && WindowsCredAuth.Check(confNode.SelectSingleNode("WindowsCredAuth")))
+                { Environment.ExitCode = 1; return; }
             Environment.ExitCode = 1;
             return;
         }

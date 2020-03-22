@@ -25,7 +25,7 @@ namespace OVPN_user_pass_validation.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("^{0} : {1}$")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{0} : {1}")]
         public string def_PasswdFileEntryFormat {
             get {
                 return ((string)(this["def_PasswdFileEntryFormat"]));
