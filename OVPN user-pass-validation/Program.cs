@@ -29,7 +29,7 @@ namespace OVPN_user_pass_validation
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Source+": "+e.Message);
                 Environment.ExitCode = 1;
                 return;
             }
@@ -42,12 +42,12 @@ namespace OVPN_user_pass_validation
             pass = cred[1];
 
             
-            XmlNode confNode = conf.SelectSingleNode("/configuration");
-            if (confNode.SelectSingleNode("PasswdFileAuth").Attributes["enabled"].Value == "true"
-                && PasswdFileAuth.Check(confNode.SelectSingleNode("PasswdFileAuth")))
+            XmlNode confNode = conf.SSelectSingleNode("/configuration");
+            if (confNode.SSelectSingleNode("PasswdFileAuth").SGetAttrVal("enabled") == "true"
+                && PasswdFileAuth.Check(confNode.SSelectSingleNode("PasswdFileAuth")))
                 { Environment.ExitCode = 0; return; }
-            if (confNode.SelectSingleNode("WindowsCredAuth").Attributes["enabled"].Value == "true"
-                && WindowsCredAuth.Check(confNode.SelectSingleNode("WindowsCredAuth")))
+            if (confNode.SSelectSingleNode("WindowsCredAuth").SGetAttrVal("enabled") == "true"
+                && WindowsCredAuth.Check(confNode.SSelectSingleNode("WindowsCredAuth")))
                 { Environment.ExitCode = 0; return; }
             Environment.ExitCode = 1;
             return;

@@ -14,9 +14,9 @@ namespace OVPN_user_pass_validation
         static internal bool Check(XmlNode xmlpasswd)
         {
             string passwdPath, passwdFileFormat;
-
-            passwdPath = xmlpasswd["PasswdFilePath"].GetAttribute("value");
-            passwdFileFormat = xmlpasswd["PasswdFileEntryFormatOverride"].GetAttribute("value");
+            
+            passwdPath = xmlpasswd.SSelectSingleNode("PasswdFilePath").SGetAttrVal("value");
+            passwdFileFormat = xmlpasswd.SSelectSingleNode("PasswdFileEntryFormatOverride").SGetAttrVal("value");
 
             if (passwdFileFormat == null)
                 passwdFileFormat = Properties.Settings.Default.def_PasswdFileEntryFormat;
