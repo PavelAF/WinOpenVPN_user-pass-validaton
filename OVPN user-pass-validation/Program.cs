@@ -11,11 +11,11 @@ namespace OVPN_user_pass_validation
         
         static void Main(string[] args)
         {
-            if (args.Length != 1 || !FileExistReadable(args[0]) || new FileInfo(args[0]).Length > 160)
+            if (args.Length != 1 || !FileExistReadable(args[0]) || new FileInfo(args[0]).Length > 200)
                 { Environment.ExitCode = 1; return; }
 
-            //string xmlPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string xmlPath = @"D:\Documents\Visual Studio 2017\Projects\OVPN user-pass-validation\OVPN user-pass-validation\bin\x64\Release\OVPN user-pass-validation.exe";
+            string xmlPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string xmlPath = @"D:\Documents\Visual Studio 2017\Projects\OVPN user-pass-validation\OVPN user-pass-validation\bin\x64\Release\OVPN user-pass-validation.exe";
             xmlPath = xmlPath.Substring(0, xmlPath.LastIndexOf('.')) + ".xml";
 
             XmlDocument conf = new XmlDocument();
