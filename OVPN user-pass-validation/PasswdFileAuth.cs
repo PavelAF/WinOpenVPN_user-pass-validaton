@@ -9,9 +9,9 @@ namespace OVPN_user_pass_validation
 {
     class PasswdFileAuth
     {
-        static internal bool Begin(XmlNode xmlpasswd)
+        static internal bool Check(XmlNode xmlpasswd)
         {
-            if (!Program.FileExistReadable(xmlpasswd.)) { return false; }
+            //if (!Program.FileExistReadable(xmlpasswd)) { return false; }
             return true;
         }
     /*

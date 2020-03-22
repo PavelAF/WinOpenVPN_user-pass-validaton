@@ -49,15 +49,17 @@ namespace OVPN_user_pass_validation
 
             
             XmlNode confNode = conf.SelectSingleNode("/configuration");
-            if (confNode.SelectSingleNode("/PasswdFileAuth").Attributes["enabled"].Value == "true")
-                { PasswdFileAuth.Begin(confNode.SelectSingleNode("/PasswdFileAuth")); }
-            if (confNode.SelectSingleNode("/WindowsCredAuth").Attributes["enabled"].Value == "true")
-                { PasswdFileAuth.Begin(confNode.SelectSingleNode("/WindowsCredAuth")); }
+            if (confNode.SelectSingleNode("/PasswdFileAuth").Attributes["enabled"].Value == "true"
+                && PasswdFileAuth.Check(confNode.SelectSingleNode("/PasswdFileAuth")))
+                { Environment.ExitCode = 1; return; }
+            //if (confNode.SelectSingleNode("/WindowsCredAuth").Attributes["enabled"].Value == "true"
+            //    && PasswdFileAuth.Check(confNode.SelectSingleNode("/WindowsCredAuth")))
+            //    { Environment.ExitCode = 1; return; }
 
             Environment.ExitCode = 1;
             return;
         }
-
+        
 
         internal static bool FileExistReadable(string filepath)
         {
