@@ -37,8 +37,7 @@ namespace OVPN_user_pass_validation
 
             if (!FileExistReadable(passwdFile)) { Environment.ExitCode = 1; return; }
 
-            string[] cred; //testsdsd
-            //alpha
+            string[] cred;
             try { cred = File.ReadAllLines(args[0], Encoding.UTF8); }
                 catch { Environment.ExitCode = 1; return; }
             if (cred.Length != 2) { Environment.ExitCode = 1; return; }
