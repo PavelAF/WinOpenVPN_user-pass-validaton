@@ -35,8 +35,6 @@ namespace OVPN_user_pass_validation
                     string str = stream.ReadLine();
                     if (str == loginPassCheck || str == loginPassLo)
                     {
-                        stream.Close();
-                        stream.Dispose();
                         return true;
                     }
                 }

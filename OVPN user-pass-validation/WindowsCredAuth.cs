@@ -48,7 +48,9 @@ namespace OVPN_user_pass_validation
         static bool GroupFilterCheck(XmlNode xmlGroupFiler)
         {
             var root = new DirectoryEntry($"WinNT://{Environment.MachineName},computer");
-            root = root.Children.Find(Program.login, "user");
+            try { root = root.Children.Find(Program.login, "user"); }
+            catch { return false; }
+
             var uGroups = root.Invoke("groups");
 
             foreach (XmlNode group in xmlGroupFiler.SSelectNodes("Group"))
