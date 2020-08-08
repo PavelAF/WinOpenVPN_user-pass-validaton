@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace OVPN_user_pass_validation
+namespace WinOVPN_user_pass_validaton
 {
     public static class xmlExtensions
     {

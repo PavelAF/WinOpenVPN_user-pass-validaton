@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace OVPN_user_pass_validation
+namespace WinOVPN_user_pass_validaton
 {
     class Program
     {

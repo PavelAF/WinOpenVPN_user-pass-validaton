@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace OVPN_user_pass_validation
+namespace WinOVPN_user_pass_validaton
 {
     class PasswdFileAuth
     {

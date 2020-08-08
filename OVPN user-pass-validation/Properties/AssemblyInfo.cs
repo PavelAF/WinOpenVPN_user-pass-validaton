@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные с этой сборкой.
-[assembly: AssemblyTitle("OVPN user-pass-validation x64")]
+[assembly: AssemblyTitle("WinOVPN_user_pass_validaton x64")]
 [assembly: AssemblyDescription("APB Edition")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("APB Edition")]
-[assembly: AssemblyProduct("OVPN user-pass-validation via-file Win64")]
+[assembly: AssemblyProduct("WinOVPN_user_pass_validaton Win64")]
 [assembly: AssemblyCopyright("Copyright © APB 2020")]
 [assembly: AssemblyTrademark("APB Edition")]
 [assembly: AssemblyCulture("")]
