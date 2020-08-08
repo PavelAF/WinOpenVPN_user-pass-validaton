@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OVPN_user_pass_validation.Properties {
+namespace WinOVPN_user_pass_validaton.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
