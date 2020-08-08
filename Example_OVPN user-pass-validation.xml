@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<configuration>
+	<!-- Как минимум одна секция должна быть активна! Так же конфиг xml должен быть корректным по синтаксису! Иначе будет  !! AUTH FAIL !!-->
+	<PasswdFileAuth enabled="false">
+		<PasswdFilePath value="C:\Program Files\OpenVPN\config\ovpn_passwd.txt" />
+			<!-- Match login+pass in file. Format: regex. {0} - login, {1} - pass -->
+		<PasswdFileEntryFormatOverride value="{0} : {1}" />
+	</PasswdFileAuth>
+	<!-- Authentication of the local user or Active Directory (if the server is attached to the domain) -->
+	<WindowsCredAuth enabled="true">
+		<UsersFilter enabled="true">
+			<User as-regex="true">*Администратор*</User>
+			<User>ovpn-user</User>
+		</UsersFilter>
+		<GroupFilter enabled="true">
+			<Group>ovpn-group</Group>
+			<Group>Администраторы</Group>
+			<Group>Administrators</Group>
+		</GroupFilter>
+	</WindowsCredAuth>
+</configuration>
+
