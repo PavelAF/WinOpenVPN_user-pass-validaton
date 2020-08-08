@@ -19,7 +19,7 @@ namespace OVPN_user_pass_validation
             loginPassCheck = xmlpasswd.SSelectSingleNode("PasswdFileEntryFormatOverride").SGetAttrVal("value");
 
             if (loginPassCheck == null)
-                loginPassCheck = Properties.Settings.Default.def_PasswdFileEntryFormat;
+                 loginPassCheck = Properties.Settings.Default.def_PasswdFileEntryFormat;
             if (passwdPath == null || !Program.FileExistReadable(passwdPath))
                 return false;
 

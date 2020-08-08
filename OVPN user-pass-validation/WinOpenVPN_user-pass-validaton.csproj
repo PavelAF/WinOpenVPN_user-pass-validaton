@@ -94,6 +94,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Settings1.cs" />
     <Compile Include="WindowsCredAuth.cs" />
   </ItemGroup>
   <ItemGroup>
