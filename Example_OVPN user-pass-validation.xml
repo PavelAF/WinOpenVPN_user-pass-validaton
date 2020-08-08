@@ -1,21 +1,22 @@
 <?xml version="1.0"?>
 <configuration>
-	<!-- Как минимум одна секция должна быть активна! Так же конфиг xml должен быть корректным по синтаксису! Иначе будет  !! AUTH FAIL !!-->
+	<!-- The name of the XML file must match the name of the plugin executable file and is located in the same directory! -->
+	<!-- At least one authentication section must be active! Also, the XML config must be correct in syntax! Otherwise, it will be !! AUTH FAIL !!-->
 	<PasswdFileAuth enabled="false">
 		<PasswdFilePath value="C:\Program Files\OpenVPN\config\ovpn_passwd.txt" />
 			<!-- Match login+pass in file. Format: regex. {0} - login, {1} - pass -->
 		<PasswdFileEntryFormatOverride value="{0} : {1}" />
 	</PasswdFileAuth>
-	<!-- Authentication of the local user or Active Directory (if the server is attached to the domain) -->
+	<!-- Authentication of the local user or Active Directory (if the server is attached to the domain. NOT tested!) -->
 	<WindowsCredAuth enabled="true">
 		<UsersFilter enabled="true">
-			<User as-regex="true">*Администратор*</User>
+			<User as-regex="true">*Administrator*</User>
 			<User>ovpn-user</User>
 		</UsersFilter>
 		<GroupFilter enabled="true">
 			<Group>ovpn-group</Group>
-			<Group>Администраторы</Group>
 			<Group>Administrators</Group>
+			<Group>Администраторы</Group>
 		</GroupFilter>
 	</WindowsCredAuth>
 </configuration>
